@@ -6,9 +6,10 @@ import axios from "axios";
 
 export default function Cards(props) {
   const [open, setOpen] = useState(false);
+  const [refresh, refreshInit] = useState(0);
 
   //get data gived to the component
-  const { id, name, cost, category } = props;
+  const { id, name, cost, category, cardRefresh } = props;
 
   //open edit modal
   const handleOpen = () => {
@@ -17,7 +18,9 @@ export default function Cards(props) {
 
   //delete game profile from database
   const deleteCard = () => {
-    axios.delete(`http://localhost:3001/delete/${id}`);
+    axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+      cardRefresh();
+    });
   };
 
   return (
@@ -25,6 +28,7 @@ export default function Cards(props) {
       <FormDialog
         open={open}
         setOpen={setOpen}
+        cardRefresh={cardRefresh}
         id={id}
         name={name}
         cost={cost}

@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
+import App from "../App";
 
 export default function FormDialog(props) {
   //get data gived to the component
@@ -15,6 +16,7 @@ export default function FormDialog(props) {
     cost: props.cost,
     category: props.category,
   });
+  const [refresh, refreshInit] = useState(0);
 
   //get input data
   const handleChangeValues = (value) => {
@@ -25,21 +27,30 @@ export default function FormDialog(props) {
   };
 
   //submit editions
-  const handleEditGame = (values) => {
-    axios.put("http://localhost:3001/edit", {
-      id: editValues.id,
-      name: editValues.name,
-      cost: editValues.cost,
-      category: editValues.category,
-    });
+  const handleEditGame = async (values) => {
+    await axios
+      .put("http://localhost:3001/edit", {
+        id: editValues.id,
+        name: editValues.name,
+        cost: editValues.cost,
+        category: editValues.category,
+      })
+      .then((response) => {
+        props.cardRefresh();
+      });
 
+    props.cardRefresh();
     handleClose();
   };
 
   //Delete card
-  const handleDeleteGame = (values) => {
-    axios.delete(`http://localhost:3001/delete/${editValues.id}`);
-    handleClose();
+  const handleDeleteGame = async (values) => {
+    await axios
+      .delete(`http://localhost:3001/delete/${editValues.id}`)
+      .then((response) => {
+        props.cardRefresh();
+        handleClose();
+      });
   };
 
   const [open, setOpen] = React.useState(false);
@@ -50,6 +61,7 @@ export default function FormDialog(props) {
 
   const handleClose = () => {
     props.setOpen(false);
+    props.cardRefresh();
   };
   return (
     <div>

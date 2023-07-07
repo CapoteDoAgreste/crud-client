@@ -9,12 +9,25 @@ function App() {
   const [listGames, setListGames] = useState();
   const [refresh, refreshInit] = useState(0);
 
+  const [url, setUrl] = useState("http://localhost:3001/getCards");
+
   //list all games and storage information
   useEffect(() => {
-    axios.get("http://localhost:3001/getCards").then((response) => {
+    getListGame();
+  }, [refresh]);
+
+  async function getListGame(url_) {
+    await axios.get(url).then((response) => {
       setListGames(response.data);
     });
-  }, [listGames]);
+  }
+
+  const cardRefresh = () => {
+    refreshInit(refresh + 1);
+    refreshInit(refresh + 1);
+    refreshInit(refresh + 1);
+    refreshInit(refresh + 1);
+  };
 
   //get data from inputs
   const handleChangeValues = (value) => {
@@ -56,11 +69,16 @@ function App() {
     }, 1);
   });
 
+  function search(value) {
+    setUrl(`http://localhost:3001/s/${value}`);
+    refreshInit(refresh + 1);
+  }
+
   return (
     <div className="app-container">
       <div class="card register--container mx-auto">
         <div class="card-body">
-          <h5 class="card-title text-center">Scrim Shop</h5>
+          <h5 class="card-title text-center">Basic Crud</h5>
           <div class="form-group">
             <input
               type="text"
@@ -103,6 +121,7 @@ function App() {
       </div>
       <div class="input-group mb-3 search-input">
         <input
+          id="search-input"
           type="text"
           class="form-control"
           placeholder="Insira o nome de um jogo"
@@ -113,6 +132,9 @@ function App() {
           class="btn btn-outline-secondary"
           type="button"
           id="button-addon2"
+          onClick={() => {
+            search(document.getElementById("search-input").value);
+          }}
         >
           Search
         </button>
@@ -122,6 +144,7 @@ function App() {
           listGames.map((value) => {
             return (
               <Card
+                cardRefresh={cardRefresh}
                 key={value.id}
                 setListCard={setListGames}
                 id={value.idgames}

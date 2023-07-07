@@ -54,7 +54,10 @@
 
 .search-input{
   padding: 2.5rem;
-  width: 50rem;
+  width: 40rem;
   height: 5rem;
-  right: -70rem;
+}
+
+.input-group{
+  width: 100%;
 }
