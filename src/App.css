@@ -1,7 +1,29 @@
 *{
   font-size: 16px;
+  color: #f5f4ee;
 }
 
+body{
+  background-color: #242008;
+}
+
+.card{
+  background-color: #302d1d;
+  shape-outside: circle(10rem);
+  box-shadow: 1rem;
+  color: #f5f4ee;
+}
+
+.form-control{
+  background-color: #f0e7ab;
+  border-color: #f0e7ab;
+  color: #302d1d;
+}
+
+.btn-outline-secondary{
+  border-color: #f0e7ab;
+  color: #f0e7ab;
+}
 
 .card-title{
   width: 25rem;
@@ -28,6 +50,8 @@
 
 .register--button{
   width: 100%;
+  background-color: #EED857;
+  border-color: #EED857;
 }
 
 .game-profile{
@@ -39,17 +63,24 @@
 .price-btn{
   position: absolute;
   bottom: 0.5rem;
+  background-color: #EED857;
+  border-color: #EED857;
+
 }
 
 .edit-btn{
   position: absolute;
   right: 1rem;
   bottom: 3.5rem;
+  background-color: #3F31D4;
+  border-color: #3F31D4;
 }
 .delete-btn{
   position: absolute;
   right: 1rem;
   bottom: 0.5rem;
+  background-color: #3F31D4;
+  border-color: #3F31D4;
 }
 
 .search-input{
@@ -60,4 +91,16 @@
 
 .input-group{
   width: 100%;
+}
+
+.clean-btn{
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.MuiInput-input{
+  color: #f5f4ee;
 }
